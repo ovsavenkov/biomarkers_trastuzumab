@@ -31,21 +31,21 @@ for(i in 1:5){
 }
 
 ## we run a super learner five times on training data
-## then output rusult of the model on the independent data 1/5 of
+## then output result of the model on the independent data 1/5 of
 ## the whole data set
 
 ## create function that takes training data set and testing data set
 ## and returns predicted values for training set
 
 library(SuperLearner)
-source("/Users/savenkov/Dropbox/projects/precision/code/long_df.R")
+source(".../code/long_df.R")
  ## function long_data returns long data frame for RMST estimation
  ## the input data frame should contain following columns:
  ## - id
  ## - time
  ## - censored
  ## - arm
- source("/Users/savenkov/Dropbox/projects/precision/code/SL_function.R")
+ source(".../code/SL_function.R")
  create.SL.xgboost = function(ntrees = 5:20*10) {
    for(mm in seq(length(ntrees))){
      eval(parse(text = paste('SL.xgboost.', ntrees[mm], '<- function(..., ntrees = ', ntrees[mm], ') SL.xgboost(..., ntrees = ntrees)', sep = '')), envir = .GlobalEnv)
@@ -227,8 +227,3 @@ nonresp_p = ggplot(nonresp_long, aes(time, surv_est, color = trt)) + geom_line()
             theme(legend.position = c(0.25, 0.2))
 
 gene_plot = grid.arrange(nonresp_p, resp_p, ncol = 2)
-
-
-
-
-
